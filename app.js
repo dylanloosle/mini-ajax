@@ -24,7 +24,8 @@ $(document).ready(function(){
             )
         };
     }
-    $('#addUser').on('click', function(){
+    $('#addUser').on('click', function(e){
+        e.preventDefault();
         var userName = $('#name').val();
         var userJob = $('#job').val();
         return $.ajax({
@@ -32,7 +33,7 @@ $(document).ready(function(){
             url: 'http://reqr.es/api/users',
             data: {name: userName, job: userJob},
             success: function(res) {
-                $('#recentUser').html(
+                $('#recentUser').prepend(
                     '<li>' +
                     'name: ' + res.name +
                     '</li>' +
@@ -46,6 +47,7 @@ $(document).ready(function(){
                     'created at: ' + res.createdAt +
                     '</li>'
                 )
+
             }
 
         })
